@@ -1,0 +1,19 @@
+.div2 {
+	margin-left: 40px;
+	margin-top: 30px;
+}
+
+.card img {
+	display: none;
+	width: 100%;
+	height: 200px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0; /* Start position of the shimmer */
+  }
+  100% {
+    background-position: 200px 0; /* End position of the shimmer */
+  }
+}

@@ -1,0 +1,107 @@
+<%- include("./includes/head.ejs"); %>
+
+<link rel="stylesheet" href="/add.css">
+
+<body>
+	<header>
+		<%- include("./includes/navbar.ejs"); %>
+	</header>
+
+	<div class="loading-spinner" id="loadingSpinner">
+	    <div class="spinner"></div>
+	</div>
+
+	<section>
+		<div class="container-fluid addDiv1 border">
+			<div class="row">
+				<div class="col-12 text-center">
+		          	<% if(errorMessage) { %>
+		            	<div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+		          	<% } %>
+		        </div>
+
+				<div class="col-12 col-sm-12 mb-3 text-center">
+					<h3>ADD Series</h3>
+				</div>
+
+				<div class="col-12 col-sm-12 col-lg-2"></div>
+
+				<div class="col-12 col-sm-12 col-lg-8">
+					<form action="/v1/<% if(editing) { %>sedit<% } else { %>add2<% } %>" method="POST">
+						<!-- add season -->
+						<div class="mb-4">
+						  	<label for="seasonInputName1" class="form-label">Season Number</label>
+						  	<input type="number" class="form-control" name="season" id="seasonInputName1" placeholder="e.g., 1" value="<%= oldInput.season %>">
+						</div>
+
+						<!-- title -->
+						<div class="mb-3">
+							<label for="exampleInputTitle" class="form-label">Season Title</label>
+							<input 
+								type="text" 
+								class="form-control" 
+								id="exampleInputTitle" 
+								name="stitle" 
+								placeholder="e.g., season 1"
+								value="<%= oldInput.stitle %>"
+							>
+						</div>
+
+						<!-- description -->
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea" class="form-label">Season Description</label>
+							<textarea 
+								class="form-control" 
+								id="exampleFormControlTextarea" 
+								name="sdescription" 
+								rows="3"
+							>
+								<%= oldInput.sdescription %>
+							</textarea>
+						</div>
+
+						<div class="part_one" id="part_one_template">
+						</div>
+
+						<div class="mt-2 mb-5">
+							<button type="button" class="btn btn-secondary add_more_btn">
+								Add Next Episode
+							</button>
+						</div>
+
+						<input type="hidden" name="id" value="<%= oldInput.id %>" />
+						<% if(editing) { %>
+							<input type="hidden" name="sid" value="<%= oldInput.sid %>" />
+						<% } %>
+
+						<div class="mt-5">
+							<button type="submit" class="btn btn-primary" id="subBtn">
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="col-12 col-sm-12 col-lg-2"></div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		let dataArray = '<%= JSON.stringify(oldInput) %>';
+		let count = <%= count %>;
+		dataArray = dataArray.replace(/[\t\r\n]+/g, ' ');
+
+		// window.addEventListener('load', function () {
+			setTimeout(function() {
+		    	const loadingSpinner = document.getElementById('loadingSpinner');
+		    	loadingSpinner.style.display = 'none';
+			}, 2000);
+	    // });
+	</script>
+
+	<script src="/script1.js"></script>
+
+</body>
+
+<%- include("./includes/end.ejs"); %>
